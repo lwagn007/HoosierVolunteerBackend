@@ -8,6 +8,7 @@ namespace HoosierVolunteer.Models.Event
 {
     public class EventCreate
     {
+        public Guid CreatorId { get; set; }
         public DateRange EventRange { get; set; }
         public int Type { get; set; }
         public string EventTitle { get; set; }
