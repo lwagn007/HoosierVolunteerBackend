@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8DAEE789-A401-4CEA-94D5-9A454FCB9324}</ProjectGuid>
+    <ProjectGuid>{08715D11-640D-4035-BE63-A146EA06A480}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HoosierVolunteer.Models</RootNamespace>
-    <AssemblyName>HoosierVolunteer.Models</AssemblyName>
+    <RootNamespace>HoosierVolunteer.Services</RootNamespace>
+    <AssemblyName>HoosierVolunteer.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,11 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Event\EventDetail.cs" />
-    <Compile Include="Event\EventCreate.cs" />
-    <Compile Include="Event\EventEdit.cs" />
-    <Compile Include="Event\EventListItem.cs" />
+    <Compile Include="EventService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HoosierVolunteer.Contracts\HoosierVolunteer.Contracts.csproj">
+      <Project>{C059F8A8-DA07-4C4C-B269-EA6AD7BCD9F5}</Project>
+      <Name>HoosierVolunteer.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
