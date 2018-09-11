@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -16,6 +17,17 @@ namespace HoosierVolunteer.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public bool IsOrganization { get; set; }
+        public string Username { get; set; }
+        public string Phone { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string OrganizationName { get; set; }
+        public string Address { get; set; }
+        public string State { get; set; }
+        public DateTime Birthday { get; set; }
+        public DateTimeOffset AccountCreated { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
