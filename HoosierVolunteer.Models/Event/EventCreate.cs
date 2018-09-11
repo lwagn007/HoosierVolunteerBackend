@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HoosierVolunteer.Models.Event
 {
-    class EventCreate
+    public class EventCreate
     {
     }
 }
