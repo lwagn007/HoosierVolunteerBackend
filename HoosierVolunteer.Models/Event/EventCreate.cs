@@ -6,7 +6,36 @@ using System.Threading.Tasks;
 
 namespace HoosierVolunteer.Models.Event
 {
-    class EventCreate
+    public class EventCreate
     {
+        public Guid CreatorId { get; set; }
+        public DateRange EventRange { get; set; }
+        public int Type { get; set; }
+        public string EventTitle { get; set; }
+        public int VolunteersNeeded { get; set; }
+        public string EventDescription { get; set; }
+    }
+
+    public class DateRange
+    {
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+
+        public bool Equals(DateTime date)
+        {
+            if (date == null)
+            {
+                return false;
+            }
+
+            if ((Start <= date) && (date <= End))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

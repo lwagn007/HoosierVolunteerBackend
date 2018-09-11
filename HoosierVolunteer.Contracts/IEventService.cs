@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HoosierVolunteer.Models.Event;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace HoosierVolunteer.Contracts
 {
     public interface IEventService
     {
+        bool CreateEvent(EventCreate model);
+        IEnumerable<EventListItem> GetEvents();
+        EventDetail GetEventById(int eventId);
+        bool UpdateEquipment(EventEdit model);
+        bool DeleteEquipment(int equipmentId);
     }
 }

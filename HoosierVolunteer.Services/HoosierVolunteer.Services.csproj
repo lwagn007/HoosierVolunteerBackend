@@ -49,6 +49,10 @@
       <Project>{C059F8A8-DA07-4C4C-B269-EA6AD7BCD9F5}</Project>
       <Name>HoosierVolunteer.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HoosierVolunteer.Models\HoosierVolunteer.Models.csproj">
+      <Project>{8DAEE789-A401-4CEA-94D5-9A454FCB9324}</Project>
+      <Name>HoosierVolunteer.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
