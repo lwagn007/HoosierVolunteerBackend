@@ -234,6 +234,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -341,6 +342,14 @@
     <ProjectReference Include="..\HoosierVolunteer.Data\HoosierVolunteer.Data.csproj">
       <Project>{d7d3bd49-b225-477b-bc61-e2c13ab03888}</Project>
       <Name>HoosierVolunteer.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HoosierVolunteer.Models\HoosierVolunteer.Models.csproj">
+      <Project>{8DAEE789-A401-4CEA-94D5-9A454FCB9324}</Project>
+      <Name>HoosierVolunteer.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HoosierVolunteer.Services\HoosierVolunteer.Services.csproj">
+      <Project>{08715D11-640D-4035-BE63-A146EA06A480}</Project>
+      <Name>HoosierVolunteer.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
