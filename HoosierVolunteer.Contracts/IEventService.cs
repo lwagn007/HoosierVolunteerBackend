@@ -12,7 +12,7 @@ namespace HoosierVolunteer.Contracts
         bool CreateEvent(EventCreate model);
         IEnumerable<EventListItem> GetEvents();
         EventDetail GetEventById(int eventId);
-        bool UpdateEquipment(EventEdit model);
-        bool DeleteEquipment(int equipmentId);
+        bool UpdateEvent(EventEdit model);
+        bool DeleteEvent(int eventId);
     }
 }

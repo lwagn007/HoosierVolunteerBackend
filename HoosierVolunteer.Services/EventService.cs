@@ -43,14 +43,33 @@ namespace HoosierVolunteer.Services
             }
         }
 
-        public bool DeleteEquipment(int equipmentId)
+        public bool DeleteEvent(int equipmentId)
         {
             throw new NotImplementedException();
         }
 
         public EventDetail GetEventById(int eventId)
         {
-            throw new NotImplementedException();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Events
+                    .Single(e => e.EventId == eventId && e.CreatorId == _creatorId);
+                return
+                    new EventDetail
+                    {
+                        EventId = entity.EventId,
+                        EventTitle = entity.EventTitle,
+                        EventRange = new DateRangeModel()
+                        {
+                            Start = entity.EventRange.Start,
+                            End = entity.EventRange.End
+                        },
+                        VolunteersNeeded = entity.VolunteersNeeded,
+                        EventDescription = entity.EventDescription,
+                    };
+            }
         }
 
         public IEnumerable<EventListItem> GetEvents()
@@ -58,7 +77,7 @@ namespace HoosierVolunteer.Services
             throw new NotImplementedException();
         }
 
-        public bool UpdateEquipment(EventEdit model)
+        public bool UpdateEvent(EventEdit model)
         {
             throw new NotImplementedException();
         }
