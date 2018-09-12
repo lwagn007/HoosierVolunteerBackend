@@ -328,7 +328,7 @@ namespace HoosierVolunteer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, PhoneNumber = model.PhoneNumber, LastName = model.LastName, OrganizationName = model.OrganizationName, Address = model.Address, State = model.State };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
