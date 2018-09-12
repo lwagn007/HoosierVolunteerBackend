@@ -1,18 +1,46 @@
-﻿using HoosierVolunteer.Contracts;
-using HoosierVolunteer.Models.Event;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HoosierVolunteer.Contracts;
+using HoosierVolunteer.Models;
+using HoosierVolunteer.Models.Event;
+
 
 namespace HoosierVolunteer.Services
 {
     public class EventService : IEventService
     {
+        private readonly Guid _creatorId;
+
+        public EventService(Guid creatorId)
+        {
+            _creatorId = creatorId;
+        }
+
         public bool CreateEvent(EventCreate model)
         {
-            throw new NotImplementedException();
+            var entity =
+                new Events()
+                {
+                    CreatorId = _creatorId,
+                    EventRange = new DateRange()
+                    {
+                        Start = model.EventRange.Start,
+                        End = model.EventRange.End
+                    },
+                    Type = (Events.EventType)model.Type,
+                    EventTitle = model.EventTitle,
+                    VolunteersNeeded = model.VolunteersNeeded,
+                    EventDescription = model.EventDescription
+                };
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Events.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
         }
 
         public bool DeleteEquipment(int equipmentId)
