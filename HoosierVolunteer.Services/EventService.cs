@@ -149,6 +149,10 @@ namespace HoosierVolunteer.Services
                     Start = model.EventRange.Start,
                     End = model.EventRange.End
                 };
+                entity.Type = (Events.EventType)model.Type;
+                entity.EventTitle = model.EventTitle;
+                entity.VolunteersNeeded = model.VolunteersNeeded;
+                entity.EventDescription = model.EventDescription;
                 return ctx.SaveChanges() == 1;
             }
         }
