@@ -68,7 +68,7 @@ namespace HoosierVolunteer.Services
             }
         }
 
-        IEnumerable<EventListItem> GetEventsByOwner()
+        public IEnumerable<EventListItem> GetEventsByOwner()
         {
             using (var ctx = new ApplicationDbContext())
             {
