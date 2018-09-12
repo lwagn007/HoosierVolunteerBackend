@@ -34,7 +34,8 @@ namespace HoosierVolunteer.Services
                     Type = (Events.EventType)model.Type,
                     EventTitle = model.EventTitle,
                     VolunteersNeeded = model.VolunteersNeeded,
-                    EventDescription = model.EventDescription
+                    EventDescription = model.EventDescription,
+                    Created = DateTime.Now
                 };
             using (var ctx = new ApplicationDbContext())
             {

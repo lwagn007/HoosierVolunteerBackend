@@ -14,6 +14,7 @@ namespace HoosierVolunteer.Controllers
     public class EventController : ApiController
     {
         // POST api/Event/Create
+        [HttpPost]
         public IHttpActionResult Create(EventCreate e)
         {
            if (!ModelState.IsValid)
@@ -44,6 +45,7 @@ namespace HoosierVolunteer.Controllers
         }
 
         // PUT api/Event/Update
+        [HttpPut]
         public IHttpActionResult Update(EventEdit e)
         {
             if (!ModelState.IsValid)
