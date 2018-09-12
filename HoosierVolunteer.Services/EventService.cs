@@ -43,24 +43,113 @@ namespace HoosierVolunteer.Services
             }
         }
 
-        public bool DeleteEquipment(int equipmentId)
+        public IEnumerable<EventListItem> GetEvents()
         {
-            throw new NotImplementedException();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Events
+                        .Select(
+                        e => new EventListItem
+                        {
+                            EventId = e.EventId,
+                            EventRange = new DateRangeModel()
+                            {
+                                Start = e.EventRange.Start,
+                                End = e.EventRange.End,
+                            },
+                            EventTitle = e.EventTitle,
+                            VolunteersNeeded = e.VolunteersNeeded,
+
+                        }
+                      );
+                return query.ToArray();
+            }
+        }
+
+        IEnumerable<EventListItem> GetEventsByOwner()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Events
+                        .Where(e=> e.CreatorId == _creatorId)
+                        .Select(
+                        e => new EventListItem
+                        {
+                            EventId = e.EventId,
+                            EventRange = new DateRangeModel()
+                            {
+                                Start = e.EventRange.Start,
+                                End = e.EventRange.End,
+                            },
+                            EventTitle = e.EventTitle,
+                            VolunteersNeeded = e.VolunteersNeeded,
+
+                        }
+                      );
+                return query.ToArray();
+            }
         }
 
         public EventDetail GetEventById(int eventId)
         {
-            throw new NotImplementedException();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Events
+                    .Single(e => e.EventId == eventId && e.CreatorId == _creatorId);
+                return
+                    new EventDetail
+                    {
+                        EventId = entity.EventId,
+                        EventTitle = entity.EventTitle,
+                        EventRange = new DateRangeModel()
+                        {
+                            Start = entity.EventRange.Start,
+                            End = entity.EventRange.End
+                        },
+                        VolunteersNeeded = entity.VolunteersNeeded,
+                        AttendingVolunteers = entity.AttendingVolunteers,
+                        EventDescription = entity.EventDescription,
+                    };
+            }
         }
 
-        public IEnumerable<EventListItem> GetEvents()
+
+        public bool DeleteEvent(int eventId)
         {
-            throw new NotImplementedException();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Events
+                        .Single(e => e.EventId == eventId && e.CreatorId == _creatorId);
+                ctx.Events.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
         }
 
-        public bool UpdateEquipment(EventEdit model)
+        public bool UpdateEvent(EventEdit model)
         {
-            throw new NotImplementedException();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Events
+                    .Single(e => e.EventId == model.EventId && e.CreatorId == _creatorId);
+
+                entity.EventRange = new DateRange()
+                {
+                    Start = model.EventRange.Start,
+                    End = model.EventRange.End
+                };
+                return ctx.SaveChanges() == 1;
+            }
         }
     }
 }
