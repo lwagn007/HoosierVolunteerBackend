@@ -68,6 +68,31 @@ namespace HoosierVolunteer.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class UpdateBindingModel
+    {
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Display(Name = "Phone #")]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Organization Name")]
+        public string OrganizationName { get; set; }
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Display(Name = "State")]
+        public string State { get; set; }
+    }
+
     public class RegisterExternalBindingModel
     {
         [Required]
