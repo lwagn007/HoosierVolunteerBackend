@@ -1,5 +1,5 @@
 namespace HoosierVolunteer.Data.Migrations
-{ 
+{
     using System;
     using System.Data.Entity.Migrations;
     

@@ -77,9 +77,9 @@
   <ItemGroup>
     <Compile Include="Events.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\201809131746022_geolocation.cs" />
-    <Compile Include="Migrations\201809131746022_geolocation.Designer.cs">
-      <DependentUpon>201809131746022_geolocation.cs</DependentUpon>
+    <Compile Include="Migrations\201809131755140_geolocation.cs" />
+    <Compile Include="Migrations\201809131755140_geolocation.Designer.cs">
+      <DependentUpon>201809131755140_geolocation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,8 +89,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809131746022_geolocation.resx">
-      <DependentUpon>201809131746022_geolocation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809131755140_geolocation.resx">
+      <DependentUpon>201809131755140_geolocation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,7 +13,7 @@ namespace HoosierVolunteer.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201809131746022_geolocation"; }
+            get { return "201809131755140_geolocation"; }
         }
         
         string IMigrationMetadata.Source
