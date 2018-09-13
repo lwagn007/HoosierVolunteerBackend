@@ -57,6 +57,7 @@ namespace HoosierVolunteer.Services
 
         public bool CreateEvent(EventCreate model)
         {
+            Result LocationData = GetLocationData(model.Address);
             var entity =
                 new Events()
                 {
@@ -68,6 +69,9 @@ namespace HoosierVolunteer.Services
                     },
                     Type = (Events.EventType)model.Type,
                     EventTitle = model.EventTitle,
+                    Address = model.Address,
+                    Latitude = LocationData.geometry.location.lat.ToString(),
+                    Longitude = LocationData.geometry.location.lng.ToString(),
                     VolunteersNeeded = model.VolunteersNeeded,
                     EventDescription = model.EventDescription,
                     Created = DateTime.Now
@@ -97,6 +101,9 @@ namespace HoosierVolunteer.Services
                             },
                             EventTitle = e.EventTitle,
                             VolunteersNeeded = e.VolunteersNeeded,
+                            Latitude = e.Latitude,
+                            Longitude = e.Longitude,
+                            Address = e.Address
 
                         }
                       );
@@ -111,7 +118,7 @@ namespace HoosierVolunteer.Services
                 var query =
                     ctx
                         .Events
-                        .Where(e=> e.CreatorId == _creatorId)
+                        .Where(e => e.CreatorId == _creatorId)
                         .Select(
                         e => new EventListItem
                         {
@@ -123,7 +130,9 @@ namespace HoosierVolunteer.Services
                             },
                             EventTitle = e.EventTitle,
                             VolunteersNeeded = e.VolunteersNeeded,
-
+                            Latitude = e.Latitude,
+                            Longitude = e.Longitude,
+                            Address = e.Address
                         }
                       );
                 return query.ToArray();
@@ -151,6 +160,9 @@ namespace HoosierVolunteer.Services
                         VolunteersNeeded = entity.VolunteersNeeded,
                         AttendingVolunteers = entity.AttendingVolunteers,
                         EventDescription = entity.EventDescription,
+                        Latitude = entity.Latitude,
+                        Longitude = entity.Longitude,
+                        Address = entity.Address
                     };
             }
         }
@@ -172,6 +184,7 @@ namespace HoosierVolunteer.Services
 
         public bool UpdateEvent(EventEdit model)
         {
+            Result LocationData = GetLocationData(model.Address);
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
@@ -186,6 +199,9 @@ namespace HoosierVolunteer.Services
                 };
                 entity.Type = (Events.EventType)model.Type;
                 entity.EventTitle = model.EventTitle;
+                entity.Address = model.Address;
+                entity.Latitude = LocationData.geometry.location.lat.ToString();
+                entity.Longitude = LocationData.geometry.location.lng.ToString();
                 entity.VolunteersNeeded = model.VolunteersNeeded;
                 entity.EventDescription = model.EventDescription;
                 return ctx.SaveChanges() == 1;
