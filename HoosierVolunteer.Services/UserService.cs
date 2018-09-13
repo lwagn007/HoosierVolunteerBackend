@@ -39,5 +39,25 @@ namespace HoosierVolunteer.Services
                     };
             }
         }
+
+        public bool UpdateUser(UserInfoEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Users
+                    .Single(e => e.Id == _creatorId.ToString());
+
+                entity.Email = model.Email;
+                entity.OrganizationName = model.OrganizationName;
+                entity.FirstName = model.FirstName;
+                entity.LastName = model.LastName;
+                entity.PhoneNumber = model.PhoneNumber;
+                entity.State = model.State;
+                entity.Address = model.Address;
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
