@@ -8,7 +8,7 @@ namespace HoosierVolunteer.Models
 {
     public class UserInfoEdit
     {
-        public string LocalLoginProvider { get; set; }
+        public Guid Id { get; set; }
 
         public string Email { get; set; }
 

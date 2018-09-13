@@ -16,27 +16,26 @@ namespace HoosierVolunteer.Services
             _creatorId = creatorId;
         }
 
-        public UserInfoEdit GetUserById(int userId)
+        public UserInfoEdit GetUserById(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .AspNetUsers
-                    .Single(e => e.EventId == eventId && e.CreatorId == _creatorId);
+                    .Single(e => Guid.Parse(e.Id) == _creatorId);
                 return
-                    new EventDetail
+                    new UserInfoEdit
                     {
-                        EventId = entity.EventId,
-                        EventTitle = entity.EventTitle,
-                        EventRange = new DateRangeModel()
-                        {
-                            Start = entity.EventRange.Start,
-                            End = entity.EventRange.End
-                        },
-                        VolunteersNeeded = entity.VolunteersNeeded,
-                        AttendingVolunteers = entity.AttendingVolunteers,
-                        EventDescription = entity.EventDescription,
+                        Id = Guid.Parse(entity.Id),
+                        Email = entity.Email,
+                        IsOrganization = entity.IsOrganization,
+                        OrganizationName = entity.OrganizationName,
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
+                        Phone = entity.Phone,
+                        State = entity.State,
+                        Address = entity.Address,
                     };
             }
         }
