@@ -102,8 +102,11 @@ namespace HoosierVolunteer.Controllers
                 {
                     LoginProvider = LocalLoginProvider,
                     ProviderKey = user.UserName,
+
                 });
             }
+
+            UserInfoEdit UserData = userService.GetUserById();
 
             return new ManageInfoViewModel
             {
