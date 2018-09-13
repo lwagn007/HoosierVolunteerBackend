@@ -28,7 +28,7 @@ namespace HoosierVolunteer.Models
 
         public string LastName { get; set; }
 
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
 
         public string State { get; set; }
 

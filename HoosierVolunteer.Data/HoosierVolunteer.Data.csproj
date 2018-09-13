@@ -81,6 +81,10 @@
     <Compile Include="Migrations\201809122035273_redo.Designer.cs">
       <DependentUpon>201809122035273_redo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809131509305_userdata.cs" />
+    <Compile Include="Migrations\201809131509305_userdata.Designer.cs">
+      <DependentUpon>201809131509305_userdata.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,6 +95,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809122035273_redo.resx">
       <DependentUpon>201809122035273_redo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809131509305_userdata.resx">
+      <DependentUpon>201809131509305_userdata.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

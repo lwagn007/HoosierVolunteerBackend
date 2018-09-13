@@ -116,7 +116,7 @@ namespace HoosierVolunteer.Controllers
                 OrganizationName = UserData.OrganizationName,
                 FirstName = UserData.FirstName,
                 LastName = UserData.LastName,
-                Phone = UserData.Phone,
+                PhoneNumber = UserData.PhoneNumber,
                 State = UserData.State,
                 Address = UserData.Address,
                 Logins = logins,

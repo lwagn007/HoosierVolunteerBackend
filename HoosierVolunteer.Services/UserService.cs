@@ -22,8 +22,8 @@ namespace HoosierVolunteer.Services
             {
                 var entity =
                     ctx
-                    .AspNetUsers
-                    .Single(e => Guid.Parse(e.Id) == _creatorId);
+                    .Users
+                    .Single(e => e.Id == _creatorId.ToString());
                 return
                     new UserInfoEdit
                     {
@@ -33,7 +33,7 @@ namespace HoosierVolunteer.Services
                         OrganizationName = entity.OrganizationName,
                         FirstName = entity.FirstName,
                         LastName = entity.LastName,
-                        Phone = entity.Phone,
+                        PhoneNumber = entity.PhoneNumber,
                         State = entity.State,
                         Address = entity.Address,
                     };

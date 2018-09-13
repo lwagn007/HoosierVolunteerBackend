@@ -43,6 +43,5 @@ namespace HoosierVolunteer.Models
         }
 
         public DbSet<Events> Events { get; set; }
-        public DbSet<ApplicationUser> AspNetUsers { get; set; }
     }
 }
