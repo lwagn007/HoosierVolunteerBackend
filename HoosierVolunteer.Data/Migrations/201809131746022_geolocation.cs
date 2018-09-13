@@ -1,9 +1,9 @@
 namespace HoosierVolunteer.Data.Migrations
-{
+{ 
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class redo : DbMigration
+    public partial class geolocation : DbMigration
     {
         public override void Up()
         {
@@ -15,6 +15,9 @@ namespace HoosierVolunteer.Data.Migrations
                         CreatorId = c.Guid(nullable: false),
                         EventRange_Start = c.DateTime(nullable: false),
                         EventRange_End = c.DateTime(nullable: false),
+                        Address = c.String(),
+                        Latitude = c.String(),
+                        Longitude = c.String(),
                         Type = c.Int(nullable: false),
                         EventTitle = c.String(),
                         VolunteersNeeded = c.Int(nullable: false),

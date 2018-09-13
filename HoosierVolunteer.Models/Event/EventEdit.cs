@@ -10,6 +10,7 @@ namespace HoosierVolunteer.Models.Event
     {
         public int EventId { get; set; }
         public DateRangeModel EventRange { get; set; }
+        public string Address { get; set; }
         public int Type { get; set; }
         public string EventTitle { get; set; }
         public int VolunteersNeeded { get; set; }
