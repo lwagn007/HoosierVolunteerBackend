@@ -11,6 +11,7 @@ using System.Web.Http;
 namespace HoosierVolunteer.Controllers
 {
     [Authorize]
+    [RoutePrefix("api/Event")]
     public class EventController : ApiController
     {
         // POST api/Event/Create
@@ -27,6 +28,8 @@ namespace HoosierVolunteer.Controllers
            return Ok();
         }
 
+        [HttpGet]
+        [Route("GetAll")]
         public IHttpActionResult GetAll()
         {
             EventService eventService = CreateEventService();
@@ -36,6 +39,8 @@ namespace HoosierVolunteer.Controllers
         }
 
         // GET api/Event/GetEventById
+        [HttpGet]
+        [Route("GetEventById")]
         public IHttpActionResult GetEventById(int id)
         {
             EventService eventService = CreateEventService();
@@ -46,6 +51,7 @@ namespace HoosierVolunteer.Controllers
 
         // PUT api/Event/Update
         [HttpPut]
+        [Route("Update")]
         public IHttpActionResult Update(EventEdit e)
         {
             if (!ModelState.IsValid)
@@ -59,6 +65,7 @@ namespace HoosierVolunteer.Controllers
         }
 
         // DELETE api/Event/Delete
+        [Route("Delete")]
         public IHttpActionResult Delete(int id)
         {
             var service = CreateEventService();
