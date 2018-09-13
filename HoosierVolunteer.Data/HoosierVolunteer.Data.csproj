@@ -77,17 +77,9 @@
   <ItemGroup>
     <Compile Include="Events.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\201809121558015_InitialCreate.cs" />
-    <Compile Include="Migrations\201809121558015_InitialCreate.Designer.cs">
-      <DependentUpon>201809121558015_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809121605090_uneedtomigwate.cs" />
-    <Compile Include="Migrations\201809121605090_uneedtomigwate.Designer.cs">
-      <DependentUpon>201809121605090_uneedtomigwate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809121800582_stuff.cs" />
-    <Compile Include="Migrations\201809121800582_stuff.Designer.cs">
-      <DependentUpon>201809121800582_stuff.cs</DependentUpon>
+    <Compile Include="Migrations\201809131755140_geolocation.cs" />
+    <Compile Include="Migrations\201809131755140_geolocation.Designer.cs">
+      <DependentUpon>201809131755140_geolocation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,14 +89,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809121558015_InitialCreate.resx">
-      <DependentUpon>201809121558015_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809121605090_uneedtomigwate.resx">
-      <DependentUpon>201809121605090_uneedtomigwate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809121800582_stuff.resx">
-      <DependentUpon>201809121800582_stuff.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809131755140_geolocation.resx">
+      <DependentUpon>201809131755140_geolocation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

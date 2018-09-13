@@ -7,13 +7,13 @@ namespace HoosierVolunteer.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class stuff : IMigrationMetadata
+    public sealed partial class geolocation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(stuff));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(geolocation));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809121800582_stuff"; }
+            get { return "201809131755140_geolocation"; }
         }
         
         string IMigrationMetadata.Source

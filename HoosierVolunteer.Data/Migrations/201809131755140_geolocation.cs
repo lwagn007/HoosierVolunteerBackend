@@ -3,10 +3,30 @@ namespace HoosierVolunteer.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class geolocation : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Events",
+                c => new
+                    {
+                        EventId = c.Int(nullable: false, identity: true),
+                        CreatorId = c.Guid(nullable: false),
+                        EventRange_Start = c.DateTime(nullable: false),
+                        EventRange_End = c.DateTime(nullable: false),
+                        Address = c.String(),
+                        Latitude = c.String(),
+                        Longitude = c.String(),
+                        Type = c.Int(nullable: false),
+                        EventTitle = c.String(),
+                        VolunteersNeeded = c.Int(nullable: false),
+                        AttendingVolunteers = c.Int(nullable: false),
+                        EventDescription = c.String(),
+                        Created = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.EventId);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -42,8 +62,6 @@ namespace HoosierVolunteer.Data.Migrations
                         OrganizationName = c.String(),
                         Address = c.String(),
                         State = c.String(),
-                        Birthday = c.DateTime(nullable: false),
-                        AccountCreated = c.DateTimeOffset(nullable: false, precision: 7),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -103,6 +121,7 @@ namespace HoosierVolunteer.Data.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Events");
         }
     }
 }

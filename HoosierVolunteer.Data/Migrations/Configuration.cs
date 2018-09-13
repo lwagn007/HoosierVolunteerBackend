@@ -10,7 +10,6 @@ namespace HoosierVolunteer.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "HoosierVolunteer.Models.ApplicationDbContext";
         }
 
         protected override void Seed(HoosierVolunteer.Models.ApplicationDbContext context)
@@ -18,15 +17,7 @@ namespace HoosierVolunteer.Data.Migrations
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            //  to avoid creating duplicate seed data.
         }
     }
 }

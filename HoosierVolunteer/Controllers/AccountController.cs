@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using HoosierVolunteer.Models;
 using HoosierVolunteer.Providers;
 using HoosierVolunteer.Results;
+using HoosierVolunteer.Services;
 
 namespace HoosierVolunteer.Controllers
 {
@@ -102,16 +103,58 @@ namespace HoosierVolunteer.Controllers
                 {
                     LoginProvider = LocalLoginProvider,
                     ProviderKey = user.UserName,
+
                 });
             }
+
+            UserInfoEdit UserData = new UserService(Guid.Parse(User.Identity.GetUserId())).GetUserById(Guid.Parse(User.Identity.GetUserId()));
 
             return new ManageInfoViewModel
             {
                 LocalLoginProvider = LocalLoginProvider,
                 Email = user.UserName,
+                OrganizationName = UserData.OrganizationName,
+                FirstName = UserData.FirstName,
+                LastName = UserData.LastName,
+                PhoneNumber = UserData.PhoneNumber,
+                State = UserData.State,
+                Address = UserData.Address,
                 Logins = logins,
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
             };
+        }
+
+        //Post api/Account/EditUserInfo
+        [HttpPost]
+        [Route("EditUserInfo")]
+        public async Task<IHttpActionResult> EditUserInfo(UpdateBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            UserService _UserService = new UserService(Guid.Parse(User.Identity.GetUserId()));
+
+            UserInfoEdit updateUser = new UserInfoEdit()
+            {
+                Email = model.Email,
+                OrganizationName = model.OrganizationName,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.PhoneNumber,
+                State = model.State,
+                Address = model.Address
+            };
+            
+            bool result = _UserService.UpdateUser(updateUser);
+
+            if (!result)
+            {
+                return InternalServerError();
+            }
+
+            return Ok();
         }
 
         // POST api/Account/ChangePassword
@@ -125,7 +168,7 @@ namespace HoosierVolunteer.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -258,9 +301,9 @@ namespace HoosierVolunteer.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
@@ -368,7 +411,7 @@ namespace HoosierVolunteer.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }

@@ -19,9 +19,13 @@ namespace HoosierVolunteer.Models
         }
 
         [Key]
-        public Guid CreatorId { get; set; }
+        public int EventId { get; set; }
 
+        public Guid CreatorId { get; set; }
         public DateRange EventRange { get; set; }
+        public string Address { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
         public EventType Type { get; set; }
         public string EventTitle { get; set; }
         public int VolunteersNeeded { get; set; }
