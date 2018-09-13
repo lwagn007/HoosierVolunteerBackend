@@ -1,12 +1,15 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using HoosierVolunteer.Contracts;
 using HoosierVolunteer.Models;
 using HoosierVolunteer.Models.Event;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.IO;
 
 
 namespace HoosierVolunteer.Services
@@ -18,6 +21,38 @@ namespace HoosierVolunteer.Services
         public EventService(Guid creatorId)
         {
             _creatorId = creatorId;
+        }
+
+        public Result GetLocationData(string address)
+        {
+            string LocationData = getLocationData(address);
+            Result LocationObject = DeserializeLocationData(LocationData);
+            return LocationObject;
+        }
+
+        public Result DeserializeLocationData(string SerializedData)
+        {
+            var LocationData = JsonConvert.DeserializeObject<RootObject>(SerializedData);
+            return LocationData.results[LocationData.results.Count - 1];
+        }
+
+        private static String getLocationData(string address)
+        {
+            using (var client = new HttpClient())
+            {
+                string requestUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.Replace(' ', '+') + "&key=AIzaSyAZZA66wU6vz39Jc2WY5uiD4eWygYNg2RM";
+
+
+                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
+                webRequest.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+                using (HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
         }
 
         public bool CreateEvent(EventCreate model)
