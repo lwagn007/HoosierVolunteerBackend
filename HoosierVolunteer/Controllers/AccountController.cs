@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using HoosierVolunteer.Models;
 using HoosierVolunteer.Providers;
 using HoosierVolunteer.Results;
+using HoosierVolunteer.Services;
 
 namespace HoosierVolunteer.Controllers
 {
@@ -102,13 +103,22 @@ namespace HoosierVolunteer.Controllers
                 {
                     LoginProvider = LocalLoginProvider,
                     ProviderKey = user.UserName,
+
                 });
             }
+
+            UserInfoEdit UserData = new UserService(Guid.Parse(User.Identity.GetUserId())).GetUserById(Guid.Parse(User.Identity.GetUserId()));
 
             return new ManageInfoViewModel
             {
                 LocalLoginProvider = LocalLoginProvider,
                 Email = user.UserName,
+                OrganizationName = UserData.OrganizationName,
+                FirstName = UserData.FirstName,
+                LastName = UserData.LastName,
+                Phone = UserData.Phone,
+                State = UserData.State,
+                Address = UserData.Address,
                 Logins = logins,
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
             };

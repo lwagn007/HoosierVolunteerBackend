@@ -13,7 +13,6 @@ namespace HoosierVolunteer.Models.Event
         public int Type { get; set; }
         public string EventTitle { get; set; }
         public int VolunteersNeeded { get; set; }
-        public string EventDescription { get; set; }
-        
+        public string EventDescription { get; set; }       
     }
 }

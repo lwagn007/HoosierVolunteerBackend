@@ -36,12 +36,13 @@ namespace HoosierVolunteer.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
 
         public DbSet<Events> Events { get; set; }
+        public DbSet<ApplicationUser> AspNetUsers { get; set; }
     }
 }
