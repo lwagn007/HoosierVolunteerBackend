@@ -81,6 +81,10 @@
     <Compile Include="Migrations\201809171805229_zipcity.Designer.cs">
       <DependentUpon>201809171805229_zipcity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809171907100_zipcity1.cs" />
+    <Compile Include="Migrations\201809171907100_zipcity1.Designer.cs">
+      <DependentUpon>201809171907100_zipcity1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,6 +95,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809171805229_zipcity.resx">
       <DependentUpon>201809171805229_zipcity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809171907100_zipcity1.resx">
+      <DependentUpon>201809171907100_zipcity1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
