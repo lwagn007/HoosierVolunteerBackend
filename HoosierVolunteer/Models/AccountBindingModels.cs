@@ -53,6 +53,12 @@ namespace HoosierVolunteer.Models
         [Display(Name = "Address")]
         public string Address { get; set; }
 
+        [Display(Name = "Zip")]
+        public string Zip { get; set; }
+
+        [Display(Name = "City")]
+        public string City { get; set; }
+
         [Display(Name = "State")]
         public string State { get; set; }
 

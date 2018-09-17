@@ -7,13 +7,13 @@ namespace HoosierVolunteer.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class geolocation : IMigrationMetadata
+    public sealed partial class zipcity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(geolocation));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(zipcity));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809131755140_geolocation"; }
+            get { return "201809171805229_zipcity"; }
         }
         
         string IMigrationMetadata.Source

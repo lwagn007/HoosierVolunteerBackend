@@ -3,7 +3,7 @@ namespace HoosierVolunteer.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class geolocation : DbMigration
+    public partial class zipcity : DbMigration
     {
         public override void Up()
         {
@@ -62,6 +62,8 @@ namespace HoosierVolunteer.Data.Migrations
                         OrganizationName = c.String(),
                         Address = c.String(),
                         State = c.String(),
+                        Zip = c.String(),
+                        City = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
