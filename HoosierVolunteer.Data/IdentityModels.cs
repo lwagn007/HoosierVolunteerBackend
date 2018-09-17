@@ -26,6 +26,8 @@ namespace HoosierVolunteer.Models
         public string OrganizationName { get; set; }
         public string Address { get; set; }
         public string State { get; set; }
+        public string Zip { get; set; }
+        public string City { get; set; }
         //public DateTime Birthday { get; set; }
         //public DateTimeOffset AccountCreated { get; set; }
     }

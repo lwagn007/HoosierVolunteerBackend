@@ -82,7 +82,5 @@ namespace HoosierVolunteer.Controllers
             var noteService = new EventService(userId);
             return noteService;
         }
-
-
     }
 }

@@ -34,6 +34,10 @@ namespace HoosierVolunteer.Models
 
         public string Address { get; set; }
 
+        public string Zip { get; set; }
+
+        public string City { get; set; }
+
         public IEnumerable<UserLoginInfoViewModel> Logins { get; set; }
 
         public IEnumerable<ExternalLoginViewModel> ExternalLoginProviders { get; set; }

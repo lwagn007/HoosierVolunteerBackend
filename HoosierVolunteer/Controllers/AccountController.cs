@@ -119,8 +119,10 @@ namespace HoosierVolunteer.Controllers
                 FirstName = UserData.FirstName,
                 LastName = UserData.LastName,
                 PhoneNumber = UserData.PhoneNumber,
-                State = UserData.State,
                 Address = UserData.Address,
+                Zip = UserData.Zip,
+                City = UserData.City,
+                State = UserData.State,
                 Logins = logins,
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
             };
@@ -146,7 +148,9 @@ namespace HoosierVolunteer.Controllers
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
                 State = model.State,
-                Address = model.Address
+                Address = model.Address,
+                Zip = model.Zip,
+                City = model.City
             };
             
             bool result = _UserService.UpdateUser(updateUser);

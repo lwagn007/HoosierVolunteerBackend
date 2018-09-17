@@ -36,6 +36,8 @@ namespace HoosierVolunteer.Services
                         PhoneNumber = entity.PhoneNumber,
                         State = entity.State,
                         Address = entity.Address,
+                        Zip = entity.Zip,
+                        City = entity.City
                     };
             }
         }
@@ -56,6 +58,8 @@ namespace HoosierVolunteer.Services
                 entity.PhoneNumber = model.PhoneNumber;
                 entity.State = model.State;
                 entity.Address = model.Address;
+                entity.Zip = model.Zip;
+                entity.City = model.City;
                 return ctx.SaveChanges() == 1;
             }
         }

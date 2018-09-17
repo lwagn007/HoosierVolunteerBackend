@@ -91,6 +91,12 @@ namespace HoosierVolunteer.Models
 
         [Display(Name = "State")]
         public string State { get; set; }
+
+        [Display(Name = "Zip")]
+        public string Zip { get; set; }
+
+        [Display(Name = "City")]
+        public string City { get; set; }
     }
 
     public class RegisterExternalBindingModel
