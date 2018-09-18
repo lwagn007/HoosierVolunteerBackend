@@ -15,8 +15,8 @@ namespace HoosierVolunteer
         {
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
-            var data = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(data);
+
+            
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             
