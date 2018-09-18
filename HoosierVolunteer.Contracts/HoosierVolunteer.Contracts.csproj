@@ -54,10 +54,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAdminService.cs" />
     <Compile Include="IEventService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HoosierVolunteer.Data\HoosierVolunteer.Data.csproj">
+      <Project>{d7d3bd49-b225-477b-bc61-e2c13ab03888}</Project>
+      <Name>HoosierVolunteer.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HoosierVolunteer.Models\HoosierVolunteer.Models.csproj">
       <Project>{8daee789-a401-4cea-94d5-9a454fcb9324}</Project>
       <Name>HoosierVolunteer.Models</Name>
