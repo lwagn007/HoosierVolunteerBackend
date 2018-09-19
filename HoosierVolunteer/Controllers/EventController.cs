@@ -13,7 +13,6 @@ namespace HoosierVolunteer.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Event")]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class EventController : ApiController
     {
         // POST api/Event/Create
