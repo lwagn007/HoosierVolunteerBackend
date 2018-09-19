@@ -17,6 +17,7 @@ namespace HoosierVolunteer.Controllers
     {
         // POST api/Event/Create
         [HttpPost]
+        [Route("Create")]
         public IHttpActionResult Create(EventCreate e)
         {
            if (!ModelState.IsValid)
