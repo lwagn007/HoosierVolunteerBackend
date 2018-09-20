@@ -94,11 +94,9 @@ namespace HoosierVolunteer.Services
                         e => new EventListItem
                         {
                             EventId = e.EventId,
-                            EventRange = new DateRangeModel()
-                            {
-                                Start = e.EventRange.Start,
-                                End = e.EventRange.End,
-                            },
+                            Start = e.EventRange.Start,
+                            End = e.EventRange.End,
+                            Type = (int)e.Type,
                             EventTitle = e.EventTitle,
                             VolunteersNeeded = e.VolunteersNeeded,
                             Latitude = e.Latitude,
@@ -123,11 +121,8 @@ namespace HoosierVolunteer.Services
                         e => new EventListItem
                         {
                             EventId = e.EventId,
-                            EventRange = new DateRangeModel()
-                            {
-                                Start = e.EventRange.Start,
-                                End = e.EventRange.End,
-                            },
+                            Start = e.EventRange.Start,
+                               End = e.EventRange.End,
                             EventTitle = e.EventTitle,
                             VolunteersNeeded = e.VolunteersNeeded,
                             Latitude = e.Latitude,
@@ -152,11 +147,8 @@ namespace HoosierVolunteer.Services
                     {
                         EventId = entity.EventId,
                         EventTitle = entity.EventTitle,
-                        EventRange = new DateRangeModel()
-                        {
-                            Start = entity.EventRange.Start,
-                            End = entity.EventRange.End
-                        },
+                        Start = entity.EventRange.Start,
+                        End = entity.EventRange.End,
                         VolunteersNeeded = entity.VolunteersNeeded,
                         AttendingVolunteers = entity.AttendingVolunteers,
                         EventDescription = entity.EventDescription,
