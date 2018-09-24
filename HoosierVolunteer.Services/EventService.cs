@@ -141,7 +141,7 @@ namespace HoosierVolunteer.Services
                 var entity =
                     ctx
                     .Events
-                    .Single(e => e.EventId == eventId && e.CreatorId == _creatorId);
+                    .Single(e => e.EventId == eventId);
                 return
                     new EventDetail
                     {
@@ -159,7 +159,34 @@ namespace HoosierVolunteer.Services
             }
         }
 
+        // && e.CreatorId == _creatorId second part of .single removed for testing.
+        //where this code is commented out we need to make other methods for admin and super admin.
+        public EventDetail GetEventByIdbyCreator(int eventId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Events
+                    .Single(e => e.EventId == eventId);
+                return
+                    new EventDetail
+                    {
+                        EventId = entity.EventId,
+                        EventTitle = entity.EventTitle,
+                        Start = entity.EventRange.Start,
+                        End = entity.EventRange.End,
+                        VolunteersNeeded = entity.VolunteersNeeded,
+                        AttendingVolunteers = entity.AttendingVolunteers,
+                        EventDescription = entity.EventDescription,
+                        Latitude = entity.Latitude,
+                        Longitude = entity.Longitude,
+                        Address = entity.Address
+                    };
+            }
+        }
 
+        //&& e.CreatorId == _creatorId second part of .Single removed for testing. 
         public bool DeleteEvent(int eventId)
         {
             using (var ctx = new ApplicationDbContext())
@@ -167,7 +194,7 @@ namespace HoosierVolunteer.Services
                 var entity =
                     ctx
                         .Events
-                        .Single(e => e.EventId == eventId && e.CreatorId == _creatorId);
+                        .Single(e => e.EventId == eventId);
                 ctx.Events.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
