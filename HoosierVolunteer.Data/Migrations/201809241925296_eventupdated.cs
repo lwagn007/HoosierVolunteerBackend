@@ -3,7 +3,7 @@ namespace HoosierVolunteer.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class geolocation : DbMigration
+    public partial class eventupdated : DbMigration
     {
         public override void Up()
         {
@@ -16,9 +16,12 @@ namespace HoosierVolunteer.Data.Migrations
                         EventRange_Start = c.DateTime(nullable: false),
                         EventRange_End = c.DateTime(nullable: false),
                         Address = c.String(),
+                        Zip = c.String(),
+                        City = c.String(),
+                        State = c.String(),
                         Latitude = c.String(),
                         Longitude = c.String(),
-                        Type = c.Int(nullable: false),
+                        Type = c.String(),
                         EventTitle = c.String(),
                         VolunteersNeeded = c.Int(nullable: false),
                         AttendingVolunteers = c.Int(nullable: false),
@@ -62,6 +65,8 @@ namespace HoosierVolunteer.Data.Migrations
                         OrganizationName = c.String(),
                         Address = c.String(),
                         State = c.String(),
+                        Zip = c.String(),
+                        City = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),

@@ -10,6 +10,8 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using HoosierVolunteer.Providers;
 using HoosierVolunteer.Models;
+using System.Web.Http;
+using System.Net.Http;
 
 namespace HoosierVolunteer
 {

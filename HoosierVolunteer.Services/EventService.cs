@@ -64,12 +64,15 @@ namespace HoosierVolunteer.Services
                     CreatorId = _creatorId,
                     EventRange = new DateRange()
                     {
-                        Start = model.EventRange.Start,
-                        End = model.EventRange.End
+                        Start = model.Start,
+                        End = model.End
                     },
-                    Type = (Events.EventType)model.Type,
+                    Type = model.Type,
                     EventTitle = model.EventTitle,
                     Address = model.Address,
+                    City = model.City,
+                    Zip = model.Zip,
+                    State = model.State,
                     Latitude = LocationData.geometry.location.lat.ToString(),
                     Longitude = LocationData.geometry.location.lng.ToString(),
                     VolunteersNeeded = model.VolunteersNeeded,
@@ -94,11 +97,9 @@ namespace HoosierVolunteer.Services
                         e => new EventListItem
                         {
                             EventId = e.EventId,
-                            EventRange = new DateRangeModel()
-                            {
-                                Start = e.EventRange.Start,
-                                End = e.EventRange.End,
-                            },
+                            Start = e.EventRange.Start,
+                            End = e.EventRange.End,
+                            Type = e.Type,
                             EventTitle = e.EventTitle,
                             VolunteersNeeded = e.VolunteersNeeded,
                             Latitude = e.Latitude,
@@ -123,11 +124,8 @@ namespace HoosierVolunteer.Services
                         e => new EventListItem
                         {
                             EventId = e.EventId,
-                            EventRange = new DateRangeModel()
-                            {
-                                Start = e.EventRange.Start,
-                                End = e.EventRange.End,
-                            },
+                            Start = e.EventRange.Start,
+                               End = e.EventRange.End,
                             EventTitle = e.EventTitle,
                             VolunteersNeeded = e.VolunteersNeeded,
                             Latitude = e.Latitude,
@@ -146,28 +144,60 @@ namespace HoosierVolunteer.Services
                 var entity =
                     ctx
                     .Events
-                    .Single(e => e.EventId == eventId && e.CreatorId == _creatorId);
+                    .Single(e => e.EventId == eventId);
                 return
                     new EventDetail
                     {
                         EventId = entity.EventId,
                         EventTitle = entity.EventTitle,
-                        EventRange = new DateRangeModel()
-                        {
-                            Start = entity.EventRange.Start,
-                            End = entity.EventRange.End
-                        },
+                        Start = entity.EventRange.Start,
+                        End = entity.EventRange.End,
+                        Type = entity.Type,
                         VolunteersNeeded = entity.VolunteersNeeded,
                         AttendingVolunteers = entity.AttendingVolunteers,
                         EventDescription = entity.EventDescription,
                         Latitude = entity.Latitude,
                         Longitude = entity.Longitude,
-                        Address = entity.Address
+                        Address = entity.Address,
+                        Zip = entity.Zip,
+                        City = entity.City,
+                        State = entity.State
                     };
             }
         }
 
+        // && e.CreatorId == _creatorId second part of .single removed for testing.
+        //where this code is commented out we need to make other methods for admin and super admin.
+        public EventDetail GetEventByIdbyCreator(int eventId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Events
+                    .Single(e => e.EventId == eventId);
+                return
+                    new EventDetail
+                    {
+                        EventId = entity.EventId,
+                        EventTitle = entity.EventTitle,
+                        Start = entity.EventRange.Start,
+                        End = entity.EventRange.End,
+                        Type = entity.Type,
+                        VolunteersNeeded = entity.VolunteersNeeded,
+                        AttendingVolunteers = entity.AttendingVolunteers,
+                        EventDescription = entity.EventDescription,
+                        Latitude = entity.Latitude,
+                        Longitude = entity.Longitude,
+                        Address = entity.Address,
+                        Zip = entity.Zip,
+                        City = entity.City,
+                        State = entity.State
+                    };
+            }
+        }
 
+        //&& e.CreatorId == _creatorId second part of .Single removed for testing. 
         public bool DeleteEvent(int eventId)
         {
             using (var ctx = new ApplicationDbContext())
@@ -175,7 +205,7 @@ namespace HoosierVolunteer.Services
                 var entity =
                     ctx
                         .Events
-                        .Single(e => e.EventId == eventId && e.CreatorId == _creatorId);
+                        .Single(e => e.EventId == eventId);
                 ctx.Events.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
@@ -194,12 +224,15 @@ namespace HoosierVolunteer.Services
 
                 entity.EventRange = new DateRange()
                 {
-                    Start = model.EventRange.Start,
-                    End = model.EventRange.End
+                    Start = model.Start,
+                    End = model.End
                 };
-                entity.Type = (Events.EventType)model.Type;
+                entity.Type = model.Type;
                 entity.EventTitle = model.EventTitle;
                 entity.Address = model.Address;
+                entity.Zip = model.Zip;
+                entity.City = model.City;
+                entity.State = model.State;
                 entity.Latitude = LocationData.geometry.location.lat.ToString();
                 entity.Longitude = LocationData.geometry.location.lng.ToString();
                 entity.VolunteersNeeded = model.VolunteersNeeded;

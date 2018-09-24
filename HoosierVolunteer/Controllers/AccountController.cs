@@ -17,6 +17,7 @@ using HoosierVolunteer.Models;
 using HoosierVolunteer.Providers;
 using HoosierVolunteer.Results;
 using HoosierVolunteer.Services;
+using System.Web.Http.Cors;
 
 namespace HoosierVolunteer.Controllers
 {
@@ -76,6 +77,7 @@ namespace HoosierVolunteer.Controllers
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
+        [Authorize]
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
@@ -117,8 +119,10 @@ namespace HoosierVolunteer.Controllers
                 FirstName = UserData.FirstName,
                 LastName = UserData.LastName,
                 PhoneNumber = UserData.PhoneNumber,
-                State = UserData.State,
                 Address = UserData.Address,
+                Zip = UserData.Zip,
+                City = UserData.City,
+                State = UserData.State,
                 Logins = logins,
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
             };
@@ -144,7 +148,9 @@ namespace HoosierVolunteer.Controllers
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
                 State = model.State,
-                Address = model.Address
+                Address = model.Address,
+                Zip = model.Zip,
+                City = model.City
             };
             
             bool result = _UserService.UpdateUser(updateUser);
@@ -371,7 +377,7 @@ namespace HoosierVolunteer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, PhoneNumber = model.PhoneNumber, LastName = model.LastName, OrganizationName = model.OrganizationName, Address = model.Address, State = model.State };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, PhoneNumber = model.PhoneNumber, LastName = model.LastName, OrganizationName = model.OrganizationName, Address = model.Address, State = model.State, City = model.City, Zip = model.Zip };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 

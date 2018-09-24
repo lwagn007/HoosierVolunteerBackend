@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace HoosierVolunteer.Controllers
 {
@@ -16,6 +17,7 @@ namespace HoosierVolunteer.Controllers
     {
         // POST api/Event/Create
         [HttpPost]
+        [Route("Create")]
         public IHttpActionResult Create(EventCreate e)
         {
            if (!ModelState.IsValid)
@@ -79,10 +81,8 @@ namespace HoosierVolunteer.Controllers
         private EventService CreateEventService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var noteService = new EventService(userId);
-            return noteService;
+            var eventService = new EventService(userId);
+            return eventService;
         }
-
-
     }
 }
