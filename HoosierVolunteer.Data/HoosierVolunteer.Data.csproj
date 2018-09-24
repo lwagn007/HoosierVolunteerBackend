@@ -83,9 +83,9 @@
   <ItemGroup>
     <Compile Include="Events.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\201809241559535_admin.cs" />
-    <Compile Include="Migrations\201809241559535_admin.Designer.cs">
-      <DependentUpon>201809241559535_admin.cs</DependentUpon>
+    <Compile Include="Migrations\201809241925296_eventupdated.cs" />
+    <Compile Include="Migrations\201809241925296_eventupdated.Designer.cs">
+      <DependentUpon>201809241925296_eventupdated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,8 +95,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809241559535_admin.resx">
-      <DependentUpon>201809241559535_admin.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809241925296_eventupdated.resx">
+      <DependentUpon>201809241925296_eventupdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

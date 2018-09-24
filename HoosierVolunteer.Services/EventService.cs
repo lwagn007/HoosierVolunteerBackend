@@ -67,9 +67,12 @@ namespace HoosierVolunteer.Services
                         Start = model.Start,
                         End = model.End
                     },
-                    Type = (Events.EventType)model.Type,
+                    Type = model.Type,
                     EventTitle = model.EventTitle,
                     Address = model.Address,
+                    City = model.City,
+                    Zip = model.Zip,
+                    State = model.State,
                     Latitude = LocationData.geometry.location.lat.ToString(),
                     Longitude = LocationData.geometry.location.lng.ToString(),
                     VolunteersNeeded = model.VolunteersNeeded,
@@ -96,7 +99,7 @@ namespace HoosierVolunteer.Services
                             EventId = e.EventId,
                             Start = e.EventRange.Start,
                             End = e.EventRange.End,
-                            Type = (int)e.Type,
+                            Type = e.Type,
                             EventTitle = e.EventTitle,
                             VolunteersNeeded = e.VolunteersNeeded,
                             Latitude = e.Latitude,
@@ -149,12 +152,16 @@ namespace HoosierVolunteer.Services
                         EventTitle = entity.EventTitle,
                         Start = entity.EventRange.Start,
                         End = entity.EventRange.End,
+                        Type = entity.Type,
                         VolunteersNeeded = entity.VolunteersNeeded,
                         AttendingVolunteers = entity.AttendingVolunteers,
                         EventDescription = entity.EventDescription,
                         Latitude = entity.Latitude,
                         Longitude = entity.Longitude,
-                        Address = entity.Address
+                        Address = entity.Address,
+                        Zip = entity.Zip,
+                        City = entity.City,
+                        State = entity.State
                     };
             }
         }
@@ -176,12 +183,16 @@ namespace HoosierVolunteer.Services
                         EventTitle = entity.EventTitle,
                         Start = entity.EventRange.Start,
                         End = entity.EventRange.End,
+                        Type = entity.Type,
                         VolunteersNeeded = entity.VolunteersNeeded,
                         AttendingVolunteers = entity.AttendingVolunteers,
                         EventDescription = entity.EventDescription,
                         Latitude = entity.Latitude,
                         Longitude = entity.Longitude,
-                        Address = entity.Address
+                        Address = entity.Address,
+                        Zip = entity.Zip,
+                        City = entity.City,
+                        State = entity.State
                     };
             }
         }
@@ -213,12 +224,15 @@ namespace HoosierVolunteer.Services
 
                 entity.EventRange = new DateRange()
                 {
-                    Start = model.EventRange.Start,
-                    End = model.EventRange.End
+                    Start = model.Start,
+                    End = model.End
                 };
-                entity.Type = (Events.EventType)model.Type;
+                entity.Type = model.Type;
                 entity.EventTitle = model.EventTitle;
                 entity.Address = model.Address;
+                entity.Zip = model.Zip;
+                entity.City = model.City;
+                entity.State = model.State;
                 entity.Latitude = LocationData.geometry.location.lat.ToString();
                 entity.Longitude = LocationData.geometry.location.lng.ToString();
                 entity.VolunteersNeeded = model.VolunteersNeeded;

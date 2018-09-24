@@ -81,8 +81,8 @@ namespace HoosierVolunteer.Controllers
         private EventService CreateEventService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var noteService = new EventService(userId);
-            return noteService;
+            var eventService = new EventService(userId);
+            return eventService;
         }
     }
 }

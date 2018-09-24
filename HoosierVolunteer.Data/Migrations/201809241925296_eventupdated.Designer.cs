@@ -7,13 +7,13 @@ namespace HoosierVolunteer.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class admin : IMigrationMetadata
+    public sealed partial class eventupdated : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(admin));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(eventupdated));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809241559535_admin"; }
+            get { return "201809241925296_eventupdated"; }
         }
         
         string IMigrationMetadata.Source
