@@ -3,7 +3,7 @@ namespace HoosierVolunteer.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class zipcity : DbMigration
+    public partial class admin : DbMigration
     {
         public override void Up()
         {

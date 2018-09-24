@@ -6,11 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using HoosierVolunteer.Data;
 using HoosierVolunteer.Contracts;
 using HoosierVolunteer.Models;
 
-namespace SiliconIndy.Services
+namespace HoosierVolunteer.Services
 {
     public class AdminService : IAdminService
     {
