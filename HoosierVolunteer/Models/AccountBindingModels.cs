@@ -72,6 +72,7 @@ namespace HoosierVolunteer.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        public bool IsOrganization { get; internal set; }
     }
 
     public class UpdateBindingModel
