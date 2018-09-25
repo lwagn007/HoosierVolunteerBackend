@@ -47,8 +47,8 @@ namespace HoosierVolunteer.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Organization Name")]
-        public string OrganizationName { get; set; }
+        [Display(Name = "Is Organization")]
+        public bool IsOrganization { get; set; }
 
         [Display(Name = "Address")]
         public string Address { get; set; }
@@ -72,7 +72,7 @@ namespace HoosierVolunteer.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-        public bool IsOrganization { get; internal set; }
+        //public bool IsOrganization { get; internal set; }
     }
 
     public class UpdateBindingModel

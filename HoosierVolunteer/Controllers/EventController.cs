@@ -20,14 +20,24 @@ namespace HoosierVolunteer.Controllers
         [Route("Create")]
         public IHttpActionResult Create(EventCreate e)
         {
-           if (!ModelState.IsValid)
-               return BadRequest(ModelState);
-            var service = CreateEventService();
+            if (User.IsInRole("Admin"))
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
 
-           if (!service.CreateEvent(e))
-               return InternalServerError();
+                var service = CreateEventService();
 
-           return Ok();
+                if (!service.CreateEvent(e))
+                {
+                    return InternalServerError();
+                }
+                return Ok();
+            }
+
+            return BadRequest();
+
         }
 
         [HttpGet]
@@ -56,26 +66,34 @@ namespace HoosierVolunteer.Controllers
         [Route("Update")]
         public IHttpActionResult Update(EventEdit e)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var service = CreateEventService();
+            if (User.IsInRole("Admin"))
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                var service = CreateEventService();
 
-            if (!service.UpdateEvent(e))
-                return InternalServerError();
+                if (!service.UpdateEvent(e))
+                    return InternalServerError();
+                return Ok();
+            }
 
-            return Ok();
+            return BadRequest();
         }
 
         // DELETE api/Event/Delete
         [Route("Delete")]
         public IHttpActionResult Delete(int id)
         {
-            var service = CreateEventService();
+            if (User.IsInRole("Admin"))
+            {
+                var service = CreateEventService();
 
-            if (!service.DeleteEvent(id))
-                return InternalServerError();
+                if (!service.DeleteEvent(id))
+                    return InternalServerError();
 
-            return Ok();
+                return Ok();
+            }
+            return BadRequest();
         }
 
         private EventService CreateEventService()
