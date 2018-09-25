@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin;
+using Owin;
 
 namespace HoosierVolunteer.Services
 {
@@ -14,6 +18,14 @@ namespace HoosierVolunteer.Services
         public UserService(Guid creatorId)
         {
             _creatorId = creatorId;
+        }
+
+        public bool SetRole(string newRole)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            userManager.AddToRole(_creatorId.ToString(), "SuperAdmin");
+            return true;
         }
 
         public UserInfoEdit GetUserById(Guid userId)
