@@ -131,7 +131,9 @@ namespace HoosierVolunteer.Controllers
         //Post api/Account/EditUserInfo
         [HttpPost]
         [Route("EditUserInfo")]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task<IHttpActionResult> EditUserInfo(UpdateBindingModel model)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (!ModelState.IsValid)
             {
