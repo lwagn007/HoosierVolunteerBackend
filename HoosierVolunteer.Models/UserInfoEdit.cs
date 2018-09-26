@@ -30,4 +30,10 @@ namespace HoosierVolunteer.Models
 
         public string City { get; set; }
     }
+
+    public class RoleData
+    {
+        public string Role { get; set; }
+        public bool Value { get; set; }
+    }
 }
