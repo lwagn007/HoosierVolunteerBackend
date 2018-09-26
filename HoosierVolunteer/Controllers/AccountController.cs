@@ -16,6 +16,8 @@ using Microsoft.Owin.Security.OAuth;
 using HoosierVolunteer.Models;
 using HoosierVolunteer.Providers;
 using HoosierVolunteer.Results;
+using HoosierVolunteer.Services;
+using System.Web.Http.Cors;
 
 namespace HoosierVolunteer.Controllers
 {
@@ -57,11 +59,20 @@ namespace HoosierVolunteer.Controllers
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
+            string role = "";
+            if (User.IsInRole("Admin"))
+            {
+                role = "Admin";
+            }
+            if (User.IsInRole("SuperAdmin"))
+            {
+                role = "SuperAdmin";
+            }
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
+                Role = role,
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
@@ -75,6 +86,7 @@ namespace HoosierVolunteer.Controllers
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
+        [Authorize]
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
@@ -102,16 +114,94 @@ namespace HoosierVolunteer.Controllers
                 {
                     LoginProvider = LocalLoginProvider,
                     ProviderKey = user.UserName,
+
                 });
             }
+
+            UserInfoEdit UserData = new UserService(Guid.Parse(User.Identity.GetUserId())).GetUserById(Guid.Parse(User.Identity.GetUserId()));
 
             return new ManageInfoViewModel
             {
                 LocalLoginProvider = LocalLoginProvider,
                 Email = user.UserName,
+                OrganizationName = UserData.OrganizationName,
+                FirstName = UserData.FirstName,
+                LastName = UserData.LastName,
+                PhoneNumber = UserData.PhoneNumber,
+                Address = UserData.Address,
+                Zip = UserData.Zip,
+                City = UserData.City,
+                State = UserData.State,
                 Logins = logins,
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
             };
+        }
+
+        //Post api/Account/EditUserInfo
+        [HttpPost]
+        [Route("EditUserInfo")]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task<IHttpActionResult> EditUserInfo(UpdateBindingModel model)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            UserService _UserService = new UserService(Guid.Parse(User.Identity.GetUserId()));
+
+            UserInfoEdit updateUser = new UserInfoEdit()
+            {
+                Email = model.Email,
+                OrganizationName = model.OrganizationName,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.PhoneNumber,
+                State = model.State,
+                Address = model.Address,
+                Zip = model.Zip,
+                City = model.City
+            };
+            
+            bool result = _UserService.UpdateUser(updateUser);
+
+            if (!result)
+            {
+                return InternalServerError();
+            }
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetRole")]
+        #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task<IHttpActionResult> GetRole()
+        #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            if (User.IsInRole("Admin"))
+            {
+                return Ok(
+                    new RoleData()
+                    {
+                        Role = "Admin",
+                        Value = true,
+                    });
+            }
+            if (User.IsInRole("SuperAdmin"))
+            {
+                return Ok(new RoleData()
+                {
+                    Role = "Admin",
+                    Value = true,
+                });
+            }
+            return Ok(new RoleData()
+            {
+                Role = "",
+                Value = false,
+            });
         }
 
         // POST api/Account/ChangePassword
@@ -125,7 +215,7 @@ namespace HoosierVolunteer.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -258,9 +348,9 @@ namespace HoosierVolunteer.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
@@ -328,13 +418,19 @@ namespace HoosierVolunteer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, IsOrganization = model.IsOrganization, FirstName = model.FirstName, PhoneNumber = model.PhoneNumber, LastName = model.LastName, Address = model.Address, State = model.State, City = model.City, Zip = model.Zip };
+           
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
+            }
+            Guid userid = Guid.Parse(user.Id);
+            UserService userService = new UserService(userid);
+            if (user.IsOrganization)
+            {
+                userService.SetRole("Admin");
             }
 
             return Ok();
@@ -368,7 +464,7 @@ namespace HoosierVolunteer.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }

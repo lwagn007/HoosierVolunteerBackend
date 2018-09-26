@@ -9,20 +9,18 @@ namespace HoosierVolunteer.Models
 {
     public class Events
     {
-        public enum EventType
-        {
-            Formal = 1,
-            Governance,
-            Nonformal,
-            SocialAction,
-            Project
-        }
-
         [Key]
-        public Guid CreatorId { get; set; }
+        public int EventId { get; set; }
 
+        public Guid CreatorId { get; set; }
         public DateRange EventRange { get; set; }
-        public EventType Type { get; set; }
+        public string Address { get; set; }
+        public string Zip { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string Type { get; set; }
         public string EventTitle { get; set; }
         public int VolunteersNeeded { get; set; }
         public int AttendingVolunteers { get; set; }

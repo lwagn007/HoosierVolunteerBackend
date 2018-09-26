@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -19,15 +20,16 @@ namespace HoosierVolunteer.Models
         }
 
         public bool IsOrganization { get; set; }
-        public string Username { get; set; }
         public string Phone { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string OrganizationName { get; set; }
         public string Address { get; set; }
         public string State { get; set; }
-        public DateTime Birthday { get; set; }
-        public DateTimeOffset AccountCreated { get; set; }
+        public string Zip { get; set; }
+        public string City { get; set; }
+        //public DateTime Birthday { get; set; }
+        //public DateTimeOffset AccountCreated { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -36,10 +38,12 @@ namespace HoosierVolunteer.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Events> Events { get; set; }
     }
 }
