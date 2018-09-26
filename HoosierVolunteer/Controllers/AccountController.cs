@@ -59,11 +59,20 @@ namespace HoosierVolunteer.Controllers
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
+            string role = "";
+            if (User.IsInRole("Admin"))
+            {
+                role = "Admin";
+            }
+            if (User.IsInRole("SuperAdmin"))
+            {
+                role = "SuperAdmin";
+            }
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
+                Role = role,
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
@@ -131,7 +140,9 @@ namespace HoosierVolunteer.Controllers
         //Post api/Account/EditUserInfo
         [HttpPost]
         [Route("EditUserInfo")]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task<IHttpActionResult> EditUserInfo(UpdateBindingModel model)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (!ModelState.IsValid)
             {
@@ -161,6 +172,36 @@ namespace HoosierVolunteer.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetRole")]
+        #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task<IHttpActionResult> GetRole()
+        #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            if (User.IsInRole("Admin"))
+            {
+                return Ok(
+                    new RoleData()
+                    {
+                        Role = "Admin",
+                        Value = true,
+                    });
+            }
+            if (User.IsInRole("SuperAdmin"))
+            {
+                return Ok(new RoleData()
+                {
+                    Role = "Admin",
+                    Value = true,
+                });
+            }
+            return Ok(new RoleData()
+            {
+                Role = "",
+                Value = false,
+            });
         }
 
         // POST api/Account/ChangePassword
@@ -377,13 +418,19 @@ namespace HoosierVolunteer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, PhoneNumber = model.PhoneNumber, LastName = model.LastName, OrganizationName = model.OrganizationName, Address = model.Address, State = model.State, City = model.City, Zip = model.Zip };
-
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, IsOrganization = model.IsOrganization, FirstName = model.FirstName, PhoneNumber = model.PhoneNumber, LastName = model.LastName, Address = model.Address, State = model.State, City = model.City, Zip = model.Zip };
+           
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
+            }
+            Guid userid = Guid.Parse(user.Id);
+            UserService userService = new UserService(userid);
+            if (user.IsOrganization)
+            {
+                userService.SetRole("Admin");
             }
 
             return Ok();
