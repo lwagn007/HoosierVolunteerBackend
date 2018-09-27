@@ -64,8 +64,8 @@ namespace HoosierVolunteer.Services
                     CreatorId = _creatorId,
                     EventRange = new DateRange()
                     {
-                        Start = model.Start,
-                        End = model.End
+                        Start = DateTime.Parse(model.Start),
+                        End = DateTime.Parse(model.End)
                     },
                     Type = model.Type,
                     EventTitle = model.EventTitle,

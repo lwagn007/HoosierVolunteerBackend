@@ -24,7 +24,7 @@ namespace HoosierVolunteer.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(ModelState);
+                    return BadRequest("model state is invalid.");
                 }
 
                 var service = CreateEventService();
@@ -36,7 +36,7 @@ namespace HoosierVolunteer.Controllers
                 return Ok();
             }
 
-            return BadRequest();
+            return BadRequest("Here I am!");
 
         }
 

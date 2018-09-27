@@ -24,7 +24,7 @@ namespace HoosierVolunteer.Services
         {
             ApplicationDbContext context = new ApplicationDbContext();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            userManager.AddToRole(_creatorId.ToString(), "SuperAdmin");
+            userManager.AddToRole(_creatorId.ToString(), newRole);
             return true;
         }
 
