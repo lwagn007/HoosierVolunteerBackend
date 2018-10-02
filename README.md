@@ -7,7 +7,7 @@ Hoosier Volunteers is a web application to connect local Indiana organizations w
 
 ## HTTP Requests
 
-#### POST GetToken
+#### POST / GetToken
 https://hoosiervolunteer.azurewebsites.net/token
 
 ```cs
@@ -16,7 +16,7 @@ username: usersEmail,
 password: usersPassword
 ```
 
-#### POST CreateEvent
+#### POST / CreateEvent
 https://hoosiervolunteer.azurewebsites.net/api/Event/Create
 ```cs
 EventRange: {
