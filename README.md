@@ -11,8 +11,8 @@ Hoosier Volunteers is a web application to connect local Indiana organizations w
 https://hoosiervolunteer.azurewebsites.net/token
 
 ```cs
-grant_type: "password"
-username: usersEmail
+grant_type: "password",
+username: usersEmail,
 password: usersPassword
 ```
 
